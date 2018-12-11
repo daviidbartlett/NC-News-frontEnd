@@ -2,13 +2,8 @@ import React, { Component } from "react";
 import { Link } from "@reach/router";
 import Northcoders_Logo from "../images/Northcoders_Logo.png";
 import Northcoders_Logo_reverse from "../images/Northcoders_Logo_reverse.png";
-import * as api from "../api";
 
 class ArticleCard extends Component {
-  state = {
-    article: {},
-    hasVoted: {}
-  };
   render() {
     return this.props.articles.map((article) => {
       const {
@@ -18,7 +13,8 @@ class ArticleCard extends Component {
         votes,
         comment_count,
         created_at,
-        topic
+        topic,
+        voted
       } = article;
       return (
         <div id="articleCard" key={article_id}>
@@ -27,9 +23,8 @@ class ArticleCard extends Component {
               <img
                 src={Northcoders_Logo}
                 alt="upVote"
-                className={
-                  this.state.hasVoted[article_id] ? "submittedVote" : null
-                }
+                data-tag={voted}
+                className={voted === 1 ? "submittedVote" : null}
                 id={article_id}
               />
             </button>
@@ -38,9 +33,8 @@ class ArticleCard extends Component {
               <img
                 src={Northcoders_Logo_reverse}
                 alt="downVote"
-                className={
-                  this.state.hasVoted[article_id] ? "submittedVote" : null
-                }
+                data-tag={voted}
+                className={voted === -1 ? "submittedVote" : null}
                 id={article_id}
               />
             </button>
@@ -62,19 +56,12 @@ class ArticleCard extends Component {
       );
     });
   }
-  componentDidUpdate = (prevProps, prevState) => {
-    if (prevState.article !== this.state.article) {
-      this.props.fetchArticles();
-    }
-  };
+
   handleVote = (event) => {
     const { id, alt } = event.target;
-    console.log(this.state.hasVoted);
-    if (!this.state.hasVoted[id]) {
-      api
-        .updateVote(id, alt)
-        .then((article) => this.setState({ article, hasVoted: { [id]: true } }))
-        .then(console.log(this.state));
+
+    if (+event.target.dataset.tag === 0) {
+      this.props.addVote(id, alt);
     }
   };
 }
