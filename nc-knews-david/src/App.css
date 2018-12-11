@@ -22,6 +22,7 @@
   border: 1px solid green;
   background-color: rgba(0, 255, 0, 0.1);
   margin: 0;
+  display: flex;
 }
 #contents {
   grid-area: main;
@@ -40,4 +41,16 @@
   border: 1px solid orangered;
   background-color: rgba(255, 136, 0, 0.1);
   margin: 0;
+}
+#articleCard {
+  background-color: coral;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+}
+
+#votingArea {
+  display: flex;
+  flex-direction: column;
 }

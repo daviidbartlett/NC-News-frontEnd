@@ -5,19 +5,39 @@ import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import SideBar from "./components/SideBar";
 import Contents from "./components/Contents";
+import { Router } from "@reach/router";
+import * as api from "./api";
+import Article from "./components/Article";
 
 class App extends Component {
+  state = {
+    topics: []
+  };
   render() {
     return (
       <div className="App">
-        <Header id="header" />
-        <Nav id="navBar" />
-        <SideBar id="sideBar" />
-        <Contents id="contents" />
-        <Footer id="footer" />
+        <Header />
+        <Nav topics={this.state.topics} />
+        <SideBar />
+        <Router id="contents">
+          <Contents path="/" />
+          <Contents path="/:topics" />
+          <Article path="/:topics/:article_id" />
+        </Router>
+        <Footer />
       </div>
     );
   }
+  componentDidMount = () => {
+    this.fetchTopics();
+  };
+
+  fetchTopics = () => {
+    api.getTopics().then((topics) => {
+      console.log(topics);
+      this.setState({ topics });
+    });
+  };
 }
 
 export default App;
