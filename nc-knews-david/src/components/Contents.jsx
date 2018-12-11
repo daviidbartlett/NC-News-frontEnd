@@ -7,7 +7,12 @@ class Contents extends Component {
     articles: []
   };
   render() {
-    return <ArticleCard articles={this.state.articles} />;
+    return (
+      <ArticleCard
+        articles={this.state.articles}
+        fetchArticles={this.fetchArticles}
+      />
+    );
   }
   componentDidMount = () => {
     this.fetchArticles();

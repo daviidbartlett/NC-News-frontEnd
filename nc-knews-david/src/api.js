@@ -20,3 +20,16 @@ export const getArticle = async (article_id) => {
   console.log(data.article);
   return data.article;
 };
+
+export const updateVote = async (article_id, voteType) => {
+  const upOrDown = voteType === "upVote" ? 1 : -1;
+  const voteObj = {
+    inc_votes: upOrDown
+  };
+  const { data } = await axios.patch(
+    `${BASE_URL}articles/${article_id}`,
+    voteObj
+  );
+
+  return data.article;
+};

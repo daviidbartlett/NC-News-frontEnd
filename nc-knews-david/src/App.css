@@ -67,6 +67,11 @@ img {
 img:hover {
   filter: none;
 }
+
+.submittedVote {
+  filter: none;
+}
+
 #articleInfo {
   text-align: justify;
   flex: 10;
@@ -76,4 +81,13 @@ img:hover {
   justify-content: space-around;
 
   flex-direction: row;
+}
+.voteButton {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  padding: 0;
 }
