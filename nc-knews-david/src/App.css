@@ -48,9 +48,32 @@
   margin-left: 10px;
   margin-right: 10px;
   display: flex;
+  border-radius: 5px 5px 5px 5px;
 }
 
 #votingArea {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+img {
+  width: 25px;
+  height: 25px;
+  filter: grayscale(100%);
+}
+
+img:hover {
+  filter: none;
+}
+#articleInfo {
+  text-align: justify;
+  flex: 10;
+}
+#titleAuthorLine {
+  display: flex;
+  justify-content: space-around;
+
+  flex-direction: row;
 }
