@@ -59,9 +59,11 @@ class ArticleCard extends Component {
 
   handleVote = (event) => {
     const { id, alt } = event.target;
-
-    if (+event.target.dataset.tag === 0) {
-      this.props.addVote(id, alt);
+    console.log(this.props);
+    if (this.props.user) {
+      if (+event.target.dataset.tag === 0) {
+        this.props.addVote(id, alt);
+      }
     }
   };
 }

@@ -11,17 +11,22 @@ import Article from "./components/Article";
 
 class App extends Component {
   state = {
-    topics: []
+    topics: [],
+    user: {
+      name: ""
+    }
   };
+
   render() {
+    const { user } = this.state;
     return (
       <div className="App">
         <Header />
-        <Nav topics={this.state.topics} />
+        <Nav topics={this.state.topics} user={user} />
         <SideBar />
         <Router id="contents">
           <Contents path="/" />
-          <Contents path="/:topics" />
+          <Contents path="/:topics" user={user} />
           <Article path="/:topics/:article_id" />
         </Router>
         <Footer />

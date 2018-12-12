@@ -7,8 +7,13 @@ class Contents extends Component {
     articles: []
   };
   render() {
+    const { user } = this.props;
     return (
-      <ArticleCard articles={this.state.articles} addVote={this.addVote} />
+      <ArticleCard
+        articles={this.state.articles}
+        addVote={this.addVote}
+        user={user}
+      />
     );
   }
   componentDidMount = () => {

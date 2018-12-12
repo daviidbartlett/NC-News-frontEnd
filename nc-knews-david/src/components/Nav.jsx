@@ -2,6 +2,7 @@ import React from "react";
 import { Menu, MenuList, MenuButton, MenuLink } from "@reach/menu-button";
 import { Link } from "@reach/router";
 import "@reach/menu-button/styles.css";
+import Login from "./Login";
 
 const Nav = ({ topics }) => {
   return (
@@ -19,6 +20,7 @@ const Nav = ({ topics }) => {
           ))}
         </MenuList>
       </Menu>
+      <Login />
     </>
   );
 };
