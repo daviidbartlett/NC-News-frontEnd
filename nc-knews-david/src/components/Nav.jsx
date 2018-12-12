@@ -3,10 +3,11 @@ import { Menu, MenuList, MenuButton, MenuLink } from "@reach/menu-button";
 import { Link } from "@reach/router";
 import "@reach/menu-button/styles.css";
 import Login from "./Login";
+import Auth from "./Auth";
 
-const Nav = ({ topics }) => {
+const Nav = ({ topics, setUser, user, handleLogout }) => {
   return (
-    <>
+    <div id="navBar">
       <Link to="/">Home</Link>
       <Menu>
         <MenuButton>
@@ -20,8 +21,11 @@ const Nav = ({ topics }) => {
           ))}
         </MenuList>
       </Menu>
-      <Login />
-    </>
+
+      <Auth user={user} handleLogout={handleLogout}>
+        <Login setUser={setUser} />
+      </Auth>
+    </div>
   );
 };
 

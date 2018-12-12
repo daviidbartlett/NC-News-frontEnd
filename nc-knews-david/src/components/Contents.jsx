@@ -19,13 +19,9 @@ class Contents extends Component {
   componentDidMount = () => {
     this.fetchArticles();
   };
-  componentDidUpdate = (prevProps, prevState) => {
+  componentDidUpdate = (prevProps) => {
     if (prevProps.topics !== this.props.topics) this.fetchArticles();
-
-    if (
-      JSON.stringify(prevState.articles[30]) !==
-      JSON.stringify(this.state.articles[30])
-    )
+    if (JSON.stringify(prevProps.user) !== JSON.stringify(this.props.user))
       this.fetchArticles();
   };
 

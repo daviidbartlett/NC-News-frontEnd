@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
-import Northcoders_Logo from "../images/Northcoders_Logo.png";
-import Northcoders_Logo_reverse from "../images/Northcoders_Logo_reverse.png";
+import VoteArticle from "./VoteArticle";
 
 class ArticleCard extends Component {
   render() {
@@ -18,27 +17,13 @@ class ArticleCard extends Component {
       } = article;
       return (
         <div id="articleCard" key={article_id}>
-          <span id="votingArea">
-            <button className="voteButton" onClick={this.handleVote}>
-              <img
-                src={Northcoders_Logo}
-                alt="upVote"
-                data-tag={voted}
-                className={voted === 1 ? "submittedVote" : null}
-                id={article_id}
-              />
-            </button>
-            <p>{votes}</p>
-            <button className="voteButton" onClick={this.handleVote}>
-              <img
-                src={Northcoders_Logo_reverse}
-                alt="downVote"
-                data-tag={voted}
-                className={voted === -1 ? "submittedVote" : null}
-                id={article_id}
-              />
-            </button>
-          </span>
+          <VoteArticle
+            votes={votes}
+            voted={voted}
+            article_id={article_id}
+            addVote={this.props.addVote}
+            user={this.props.user}
+          />
           <span id="articleInfo">
             <span id="titleAuthorLine">
               <p>
@@ -56,16 +41,6 @@ class ArticleCard extends Component {
       );
     });
   }
-
-  handleVote = (event) => {
-    const { id, alt } = event.target;
-    console.log(this.props);
-    if (this.props.user) {
-      if (+event.target.dataset.tag === 0) {
-        this.props.addVote(id, alt);
-      }
-    }
-  };
 }
 
 export default ArticleCard;

@@ -25,12 +25,14 @@
   margin: 0;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
 }
 #contents {
   grid-area: main;
   border: 1px solid blue;
-  background-color: rgba(0, 0, 255, 0.1);
-  margin: 0;
+  background-color: rgba(219, 224, 229, 1);
+  height: 100vh;
+  overflow: scroll;
 }
 #sideBar {
   grid-area: sideBar;
@@ -45,12 +47,13 @@
   margin: 0;
 }
 #articleCard {
-  background-color: coral;
+  background-color: white;
   margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
   display: flex;
-  border-radius: 5px 5px 5px 5px;
+  border-radius: 3px 3px 3px 3px;
+  padding: 10px;
 }
 
 #votingArea {
@@ -92,4 +95,8 @@ img:hover {
   overflow: hidden;
   outline: none;
   padding: 0;
+}
+
+#article {
+  display: flex;
 }

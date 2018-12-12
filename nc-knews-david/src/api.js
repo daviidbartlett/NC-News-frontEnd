@@ -29,6 +29,26 @@ export const updateVote = async (article_id, voteType) => {
     `${BASE_URL}articles/${article_id}`,
     voteObj
   );
+  return data.article;
+};
 
+export const checkUsername = async (username) => {
+  const { data } = await axios.get(`${BASE_URL}users/${username}`);
+  console.log(data.user);
+  if (data.user) return data.user;
+  return data.msg;
+};
+
+export const getComments = async (id) => {
+  const { data } = await axios.get(`${BASE_URL}articles/${id}/comments`);
+  return data.comments;
+};
+
+export const postNewArticle = async (topic, title, body, user_id) => {
+  const articleObj = { title: title, body: body, user_id: user_id };
+  const { data } = await axios.post(
+    `${BASE_URL}topics/${topic}/articles`,
+    articleObj
+  );
   return data.article;
 };

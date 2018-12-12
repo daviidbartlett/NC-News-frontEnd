@@ -8,8 +8,10 @@ class Login extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        <label htmlFor="username">Login:</label>
         <input
           id="username"
+          placeholder="username"
           value={this.state.username}
           onChange={this.handleChange}
         />
@@ -22,7 +24,14 @@ class Login extends Component {
   };
   handleSubmit = (event) => {
     event.preventDefault();
-    //api.checkUsername(this.state.username).then(console.log);
+    api
+      .checkUsername(this.state.username)
+      .then((user) => {
+        this.props.setUser(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 }
 
