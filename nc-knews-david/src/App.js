@@ -13,7 +13,8 @@ import NewArticleForm from "./components/NewArticleForm";
 class App extends Component {
   state = {
     topics: [],
-    user: null
+    user: null,
+    articles: []
   };
 
   render() {
@@ -29,25 +30,47 @@ class App extends Component {
         />
         <Router id="sideBar">
           <SideBar path="/" user={user} />
-
           <NewArticleForm
             path="/:topic"
             user={user}
-            addNewArticle={this.addNewArticle}
+            updateStateWithNewArticle={this.updateStateWithNewArticle}
           />
         </Router>
 
         <Router id="contents">
-          <Contents path="/" user={user} />
-          <Contents path="/:topics" user={user} />
-          <Article path="/:topics/:article_id" />
+          <Contents
+            path="/"
+            user={user}
+            fetchArticles={this.fetchArticles}
+            articles={this.state.articles}
+          />
+          <Contents
+            path="/:topic"
+            user={user}
+            fetchArticles={this.fetchArticles}
+            articles={this.state.articles}
+          />
+          <Article path="/:topic/:article_id" />
         </Router>
         <Footer />
       </div>
     );
   }
+  fetchArticles = (topic) => {
+    api.getArticles(topic).then((articles) => {
+      this.setState({
+        articles: articles.map((article) => {
+          article.voted = 0;
+          return article;
+        })
+      });
+    });
+  };
   componentDidMount = () => {
     this.fetchTopics();
+  };
+  updateStateWithNewArticle = (topic) => {
+    this.fetchArticles(topic);
   };
 
   fetchTopics = () => {
@@ -60,12 +83,6 @@ class App extends Component {
   };
   handleLogout = () => {
     this.setState({ user: null });
-  };
-
-  addNewArticle = (topic, title, body) => {
-    api
-      .postNewArticle(topic, title, body, this.state.user.user_id)
-      .then(console.log);
   };
 }
 

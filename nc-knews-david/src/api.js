@@ -8,6 +8,7 @@ export const getArticles = async (topic) => {
     : `${BASE_URL}articles`;
   console.log(URL);
   const { data } = await axios.get(URL);
+  console.log(data.articles);
   return data.articles;
 };
 export const getTopics = async () => {
@@ -50,5 +51,6 @@ export const postNewArticle = async (topic, title, body, user_id) => {
     `${BASE_URL}topics/${topic}/articles`,
     articleObj
   );
+  console.log(data.article);
   return data.article;
 };

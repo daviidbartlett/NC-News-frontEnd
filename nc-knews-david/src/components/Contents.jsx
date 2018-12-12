@@ -3,38 +3,36 @@ import * as api from "../api";
 import ArticleCard from "./ArticleCard";
 
 class Contents extends Component {
-  state = {
-    articles: []
-  };
+  state = {};
   render() {
     const { user } = this.props;
     return (
       <ArticleCard
-        articles={this.state.articles}
+        articles={this.props.articles}
         addVote={this.addVote}
         user={user}
       />
     );
   }
   componentDidMount = () => {
-    this.fetchArticles();
+    console.log(this.props.topic);
+    this.props.fetchArticles(this.props.topic);
   };
   componentDidUpdate = (prevProps) => {
-    if (prevProps.topics !== this.props.topics) this.fetchArticles();
+    if (prevProps.topic !== this.props.topic)
+      this.props.fetchArticles(this.props.topic);
+    console.log(
+      JSON.stringify(prevProps.articles.length) !==
+        JSON.stringify(this.props.articles.length)
+    );
+    if (
+      JSON.stringify(prevProps.articles) !== JSON.stringify(this.props.articles)
+    )
+      this.props.fetchArticles(this.props.topic);
     if (JSON.stringify(prevProps.user) !== JSON.stringify(this.props.user))
-      this.fetchArticles();
+      this.props.fetchArticles();
   };
 
-  fetchArticles = () => {
-    api.getArticles(this.props.topics).then((articles) => {
-      this.setState({
-        articles: articles.map((article) => {
-          article.voted = 0;
-          return article;
-        })
-      });
-    });
-  };
   addVote = (id, vote) => {
     const increment = vote === "upVote" ? 1 : -1;
 

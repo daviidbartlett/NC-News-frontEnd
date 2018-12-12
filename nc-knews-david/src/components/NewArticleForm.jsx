@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import * as api from "../api";
 
 class NewArticleForm extends Component {
   state = {
@@ -39,14 +40,30 @@ class NewArticleForm extends Component {
     this.setState({ [id]: value });
   };
   handleSubmit = (event) => {
+    event.preventDefault();
     if (this.props.user) {
-      event.preventDefault();
-      this.props.addNewArticle(
+      this.addNewArticle();
+      this.setState({
+        title: "Your article has",
+        body: "been submitted:)"
+      });
+    }
+  };
+  addNewArticle = () => {
+    api
+      .postNewArticle(
         this.props.topic,
         this.state.title,
-        this.state.body
-      );
-    }
+        this.state.body,
+        this.props.user.user_id
+      )
+      .then(() => {
+        this.setState({
+          title: "",
+          body: ""
+        });
+        this.props.updateStateWithNewArticle(this.props.topic);
+      });
   };
 }
 
