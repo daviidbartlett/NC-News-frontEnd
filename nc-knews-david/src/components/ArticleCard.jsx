@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
 import VoteArticle from "./VoteArticle";
+import RenderDelete from "./RenderDelete";
+import Delete from "./Delete";
 
 class ArticleCard extends Component {
   render() {
     return this.props.articles.map((article) => {
+      const type = "map";
       const {
         title,
         article_id,
@@ -15,10 +18,12 @@ class ArticleCard extends Component {
         topic,
         voted
       } = article;
+      console.log(this.props.user);
       return (
         <div id="articleCard" key={article_id}>
           <VoteArticle
             votes={votes}
+            type={type}
             voted={voted}
             article_id={article_id}
             addVote={this.props.addVote}
@@ -30,6 +35,13 @@ class ArticleCard extends Component {
                 <Link to={`/${topic}`}>{topic}</Link>
               </p>
               <p>{author}</p>
+
+              <RenderDelete user={this.props.user} author={author}>
+                <Delete
+                  article_id={article_id}
+                  deleteItem={this.props.deleteItem}
+                />
+              </RenderDelete>
             </span>
             <h4>
               <Link to={`/${topic}/${article_id}`}>{title}</Link>

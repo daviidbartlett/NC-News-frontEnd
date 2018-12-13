@@ -1,22 +1,25 @@
 import React, { Component } from "react";
-import * as api from "../api";
 import Comments from "./Comments";
 import VoteArticle from "./VoteArticle";
 
 class Article extends Component {
-  state = {
-    article: {},
-    comments: [],
-    hasVoted: 0
-  };
   render() {
-    const { body, title, author, votes, article_id } = this.state.article;
+    const {
+      body,
+      title,
+      author,
+      votes,
+      article_id,
+      voted
+    } = this.props.article;
+    const type = "single";
     return (
       <>
         <div id="articleCard">
           <VoteArticle
             votes={votes}
-            voted={this.state.hasVoted}
+            voted={voted}
+            type={type}
             article_id={article_id}
             addVote={this.props.addVote}
             user={this.props.user}
@@ -30,25 +33,20 @@ class Article extends Component {
             <p>{body}</p>
           </span>
         </div>
-        <Comments comments={this.state.comments} />
+        <Comments
+          comments={this.props.comments}
+          addVote={this.props.addVote}
+          user={this.props.user}
+          article_id={this.props.article_id}
+          deleteItem={this.props.deleteItem}
+        />
       </>
     );
   }
   componentDidMount = () => {
     console.log(this.props, "props");
-    this.fetchArticle();
-    this.fetchCommentsForArticle();
-  };
-
-  fetchArticle = () => {
-    api.getArticle(this.props.article_id).then((article) => {
-      this.setState({ article });
-    });
-  };
-  fetchCommentsForArticle = () => {
-    api.getComments(this.props.article_id).then((comments) => {
-      this.setState({ comments });
-    });
+    this.props.fetchArticle(this.props.article_id);
+    this.props.fetchCommentsForArticle(this.props.article_id);
   };
 }
 

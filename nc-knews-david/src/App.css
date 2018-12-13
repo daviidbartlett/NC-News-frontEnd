@@ -1,7 +1,10 @@
+body {
+  margin: 0px;
+}
 .App {
   text-align: center;
   display: grid;
-  grid-template: 1fr 1fr 8fr 1fr / 3fr 1fr;
+  grid-template: 1fr 1fr 8fr 1fr / 2fr 1fr;
   grid-template-areas:
     "header header"
     "nav nav"
@@ -9,6 +12,7 @@
     "footer footer";
   height: 100vh;
   background: rgba(219, 224, 229, 1);
+  font-family: "Work Sans", sans-serif;
 }
 
 #header {
@@ -29,21 +33,28 @@
 }
 #contents {
   grid-area: main;
-  border: 1px solid blue;
+
   background-color: rgba(219, 224, 229, 1);
   height: 100vh;
   overflow: scroll;
 }
 #sideBar {
   grid-area: sideBar;
-  border: 1px solid purple;
-  background-color: rgba(162, 0, 255, 0.1);
+  display: flex;
+  background-color: rgba(219, 224, 229, 1);
   margin: 0;
+  flex-direction: column;
+}
+#sideBarForm {
+  background: white;
+  border-radius: 3px 3px 3px 3px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 10px;
 }
 #footer {
   grid-area: footer;
-  border: 1px solid orangered;
-  background-color: rgba(255, 136, 0, 0.1);
   margin: 0;
 }
 #articleCard {
@@ -53,7 +64,10 @@
   margin-right: 10px;
   display: flex;
   border-radius: 3px 3px 3px 3px;
-  padding: 10px;
+  border: solid 1px rgb(179, 179, 179);
+}
+#articleCard:hover {
+  border: solid 1px rgb(137, 137, 137);
 }
 
 #votingArea {
@@ -62,11 +76,24 @@
   flex: 1;
   justify-content: center;
   align-items: center;
+  margin-left: 0;
+  background: rgb(248, 249, 250);
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
 }
 img {
   width: 25px;
   height: 25px;
   filter: grayscale(100%);
+}
+#userAvatar {
+  width: 50px;
+  height: 50px;
+  filter: none;
+}
+#userAvatar:hover {
+  transform: scale(1.5);
+  transition: all 0.7s;
 }
 
 img:hover {
@@ -79,7 +106,7 @@ img:hover {
 
 #articleInfo {
   text-align: justify;
-  flex: 10;
+  flex: 15;
 }
 #titleAuthorLine {
   display: flex;

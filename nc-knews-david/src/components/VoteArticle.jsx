@@ -4,6 +4,7 @@ import Northcoders_Logo_reverse from "../images/Northcoders_Logo_reverse.png";
 class VoteArticle extends Component {
   render() {
     const { article_id, votes, voted } = this.props;
+
     return (
       <span id="votingArea">
         <button className="voteButton" onClick={this.handleVote}>
@@ -30,14 +31,13 @@ class VoteArticle extends Component {
   }
   handleVote = (event) => {
     const { id, alt } = event.target;
-    console.log(this.props);
 
     if (this.props.user !== null) {
       if (+event.target.dataset.tag === 0) {
-        this.props.addVote(id, alt);
+        this.props.addVote(id, alt, this.props.type, this.props.comment_id);
       }
     } else {
-      console.log("Please Login");
+      alert("You need to login to use this feature!");
     }
   };
 }

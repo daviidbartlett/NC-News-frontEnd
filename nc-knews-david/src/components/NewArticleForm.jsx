@@ -9,28 +9,30 @@ class NewArticleForm extends Component {
 
   render() {
     return (
-      <div>
+      <div id="sideBarForm">
         <h3>Add an article to {this.props.topics} topic:</h3>
         <form onSubmit={this.handleSubmit}>
-          <label forHTML="title">
+          <label htmlFor="title">
             Article title:
             <input
+              required
               type="text"
               id="title"
               onChange={this.handleChange}
               value={this.state.title}
             />
           </label>
-          <label forHTML="title">
+          <label htmlFor="title">
             Article body:
             <input
+              required
               type="text"
               id="body"
               onChange={this.handleChange}
               value={this.state.body}
             />
           </label>
-          <button type="submit">Add task</button>
+          <button type="submit">Post new Article</button>
         </form>
       </div>
     );
@@ -47,7 +49,7 @@ class NewArticleForm extends Component {
         title: "Your article has",
         body: "been submitted:)"
       });
-    }
+    } else alert("You need to login to use this feature!");
   };
   addNewArticle = () => {
     api
