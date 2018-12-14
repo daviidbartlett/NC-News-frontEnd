@@ -114,7 +114,7 @@ a {
   transition: all 0.7s;
 }
 
-img:hover {
+#voteArrow:hover {
   filter: none;
 }
 
