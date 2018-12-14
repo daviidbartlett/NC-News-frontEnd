@@ -18,7 +18,7 @@ class ArticleCard extends Component {
         topic,
         voted
       } = article;
-      console.log(this.props.user);
+
       return (
         <div id="articleCard" key={article_id}>
           <VoteArticle

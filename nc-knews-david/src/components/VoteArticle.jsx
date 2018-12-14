@@ -3,7 +3,7 @@ import Northcoders_Logo from "../images/Northcoders_Logo.png";
 import Northcoders_Logo_reverse from "../images/Northcoders_Logo_reverse.png";
 class VoteArticle extends Component {
   render() {
-    const { article_id, votes, voted } = this.props;
+    const { votes, voted } = this.props;
 
     return (
       <span id="votingArea">
@@ -11,9 +11,8 @@ class VoteArticle extends Component {
           <img
             src={Northcoders_Logo}
             alt="upVote"
-            data-tag={voted}
             className={voted === 1 ? "submittedVote" : null}
-            id={article_id}
+            id="voteArrow"
           />
         </button>
         <p>{votes}</p>
@@ -21,20 +20,24 @@ class VoteArticle extends Component {
           <img
             src={Northcoders_Logo_reverse}
             alt="downVote"
-            data-tag={voted}
             className={voted === -1 ? "submittedVote" : null}
-            id={article_id}
+            id="voteArrow"
           />
         </button>
       </span>
     );
   }
   handleVote = (event) => {
-    const { id, alt } = event.target;
+    const { alt } = event.target;
 
     if (this.props.user !== null) {
-      if (+event.target.dataset.tag === 0) {
-        this.props.addVote(id, alt, this.props.type, this.props.comment_id);
+      if (this.props.voted === 0) {
+        this.props.addVote(
+          this.props.article_id,
+          alt,
+          this.props.type,
+          this.props.comment_id
+        );
       }
     } else {
       alert("You need to login to use this feature!");

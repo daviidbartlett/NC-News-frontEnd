@@ -8,7 +8,9 @@ import Auth from "./Auth";
 const Nav = ({ topics, setUser, user, handleLogout }) => {
   return (
     <div id="navBar">
-      <Link to="/">Home</Link>
+      <Link id="homeLink" to="/">
+        Home
+      </Link>
       <Menu>
         <MenuButton>
           Topics <span aria-hidden>▾</span>

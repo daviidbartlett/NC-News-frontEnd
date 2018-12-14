@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Comments from "./Comments";
 import VoteArticle from "./VoteArticle";
+import QueryBar from "./QueryBar";
 
 class Article extends Component {
   render() {
@@ -33,6 +34,11 @@ class Article extends Component {
             <p>{body}</p>
           </span>
         </div>
+        <QueryBar
+          fetchCommentsForArticle={this.props.fetchCommentsForArticle}
+          fetchArticles={this.props.fetchArticles}
+          article_id={article_id}
+        />
         <Comments
           comments={this.props.comments}
           addVote={this.props.addVote}
@@ -44,7 +50,6 @@ class Article extends Component {
     );
   }
   componentDidMount = () => {
-    console.log(this.props, "props");
     this.props.fetchArticle(this.props.article_id);
     this.props.fetchCommentsForArticle(this.props.article_id);
   };
